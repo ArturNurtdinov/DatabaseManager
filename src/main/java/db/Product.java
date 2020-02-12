@@ -8,7 +8,8 @@ public class Product {
     String title;
     int cost;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(int id, String prodid, String title, int cost) {
         if (cost < 0) {
@@ -50,5 +51,13 @@ public class Product {
             throw new IllegalArgumentException("Cost can't be negative.");
         }
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " " +
+                "prodid: " + prodid + " " +
+                "title: " + title + " " +
+                "cost: " + cost;
     }
 }
