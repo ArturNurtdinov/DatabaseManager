@@ -71,6 +71,54 @@ public class ProductDAO {
         }
     }
 
+    public ArrayList<Product> filterByPrice(int from, int to) {
+        if ((from < 0) || (to < 0) || (to < from)) {
+            throw new IllegalArgumentException("Invalid price.");
+        }
+
+        try (Connection connection = source.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + TABLE_NAME +
+                    " WHERE cost BETWEEN ? AND ?");
+            statement.setInt(1, from);
+            statement.setInt(2, to);
+
+            ResultSet res = statement.executeQuery();
+
+            ArrayList<Product> list = new ArrayList<>();
+
+            while (res.next()) {
+                int id = res.getInt("id");
+                String prodid = res.getString("prodid");
+                String title = res.getString("title");
+                int cost = res.getInt("cost");
+                list.add(new Product(id, prodid, title, cost));
+            }
+
+            return list;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed filtering", e);
+        }
+    }
+
+    public void changePrice(String title, int newPrice) {
+        if (newPrice < 0) {
+            throw new RuntimeException("Price can not be negative");
+        }
+
+        try (Connection connection = source.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("UPDATE " + TABLE_NAME +
+                    " SET cost = ? WHERE title = ?");
+            statement.setInt(1, newPrice);
+            statement.setString(2, title);
+            if (statement.executeUpdate() == 0) {
+                throw new RuntimeException("No such element.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed changing price", e);
+        }
+    }
+
     public ArrayList<Product> list() {
         try (Connection connection = source.getConnection()) {
             Statement statement = connection.createStatement();
