@@ -5,10 +5,7 @@ import db.ProductDAO;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class DBManager {
@@ -111,10 +108,25 @@ public class DBManager {
     }
 
     private void changePrice(Scanner args) {
-        out.println("changePrice");
+        try {
+            String title = args.next();
+            int newCost = args.nextInt();
+            dao.changePrice(title, newCost);
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Wrong format of a command", e);
+        }
     }
 
     private void filterByPrice(Scanner args) {
-        out.print("filterByPrice");
+        try {
+            int from = args.nextInt();
+            int to = args.nextInt();
+            ArrayList<Product> list = dao.filterByPrice(from, to);
+            for (Product it : list) {
+                out.println(it);
+            }
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Wrong format of a command");
+        }
     }
 }
