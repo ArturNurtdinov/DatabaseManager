@@ -1,5 +1,6 @@
 package db;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Product {
@@ -59,5 +60,21 @@ public class Product {
                 "prodid: " + prodid + " " +
                 "title: " + title + " " +
                 "cost: " + cost;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id &&
+                cost == product.cost &&
+                prodid.equals(product.prodid) &&
+                title.equals(product.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, prodid, title, cost);
     }
 }
