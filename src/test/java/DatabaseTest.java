@@ -17,7 +17,7 @@ public class DatabaseTest {
 
     private String getUsername() {
         try (InputStream input = getClass().getResourceAsStream("database.properties")) {
-            Properties properties = new Properties();
+            final Properties properties = new Properties();
             properties.load(input);
 
             System.out.println(properties.getProperty(USERNAME_KEY));
@@ -32,7 +32,7 @@ public class DatabaseTest {
 
     private String getPassword() {
         try (InputStream input = getClass().getResourceAsStream("database.properties")) {
-            Properties properties = new Properties();
+            final Properties properties = new Properties();
             properties.load(input);
 
             return properties.getProperty(PASSWORD_KEY);
@@ -51,13 +51,13 @@ public class DatabaseTest {
     @Test
     public void testList() {
         final int size = 5;
-        ArrayList<Product> listToLoad = new ArrayList<>();
+        final ArrayList<Product> listToLoad = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             listToLoad.add(new Product(i + 1, "tovar " + i, i * 10));
             dao.add(listToLoad.get(i));
         }
 
-        ArrayList<Product> dataBaseList = dao.list();
+        final ArrayList<Product> dataBaseList = dao.list();
 
         assert dataBaseList.size() == size;
 
@@ -68,7 +68,7 @@ public class DatabaseTest {
 
     @Test
     public void testAdding() {
-        Product toAdd = new Product(1, "PRODUCT_TITLE", 500);
+        final Product toAdd = new Product(1, "PRODUCT_TITLE", 500);
 
         dao.add(toAdd);
 
@@ -77,7 +77,7 @@ public class DatabaseTest {
 
     @Test
     public void testPriceChanging() {
-        Product toAdd = new Product(1, "PRODUCT_TITLE", 500);
+        final Product toAdd = new Product(1, "PRODUCT_TITLE", 500);
         final int newPrice = 1000;
 
         dao.add(toAdd);
@@ -90,18 +90,18 @@ public class DatabaseTest {
     @Test
     public void testFilterByPrice() {
         final int size = 15;
-        ArrayList<Product> listToLoad = new ArrayList<>();
-        int h = 10;
+        final ArrayList<Product> listToLoad = new ArrayList<>();
+        final int h = 10;
         for (int i = 0; i < size; i++) {
             listToLoad.add(new Product(i + 1, "tovar " + i, i * h));
             dao.add(listToLoad.get(i));
         }
 
-        int from = 30;
-        int to = 90;
-        ArrayList<Product> filtered = dao.filterByPrice(from, to);
-        int indexStart = from / h;
-        int indexEnd = to / h + 1;
+        final int from = 30;
+        final int to = 90;
+        final ArrayList<Product> filtered = dao.filterByPrice(from, to);
+        final int indexStart = from / h;
+        final int indexEnd = to / h + 1;
 
         for (int i = indexStart; i < indexEnd; i++) {
             assert listToLoad.get(i).equals(filtered.get(i - indexStart));
