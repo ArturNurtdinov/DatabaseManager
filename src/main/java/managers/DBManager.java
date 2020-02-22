@@ -127,7 +127,7 @@ public class DBManager {
             for (int i = 0; i < size; i++) {
                 dao.add(new Product(i, "товар" + i, i * 10));
             }
-            out.println("Table successfully generated, now you can type commands.");
+            out.println("Table successfully generated.");
             return true;
         } catch (Exception e) {
             out.println(e.getMessage());
