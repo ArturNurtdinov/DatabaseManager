@@ -64,7 +64,7 @@ public class ProductDAO {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE title = ?");
             statement.setString(1, title);
             if (statement.executeUpdate() == 0) {
-                throw new RuntimeException("Failed deleting product");
+                throw new RuntimeException("No such product.");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed adding product", e);
