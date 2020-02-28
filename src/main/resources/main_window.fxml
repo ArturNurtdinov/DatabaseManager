@@ -7,10 +7,10 @@
    <children>
       <TableView fx:id="productTable" layoutX="-1.0" prefHeight="320.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="idColumn" prefWidth="42.0" text="id" />
+          <TableColumn fx:id="idColumn" prefWidth="42.0" resizable="false" text="id" />
           <TableColumn fx:id="prodidColumn" prefWidth="183.0" text="prodid" />
             <TableColumn fx:id="titleColumn" prefWidth="262.0" text="title" />
-            <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="112.0" text="price" />
+            <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="112.0" resizable="false" text="price" />
         </columns>
       </TableView>
       <Button fx:id="add" layoutX="14.0" layoutY="343.0" mnemonicParsing="false" onAction="#add" prefHeight="44.0" prefWidth="68.0" text="Insert" />
