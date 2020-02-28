@@ -4,5 +4,6 @@ public enum Operations {
     ADD,
     DELETE,
     FIND,
-    EDIT
+    EDIT,
+    FILTER
 }

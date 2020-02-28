@@ -57,7 +57,7 @@ public class MainWindowController {
 
     @FXML
     private void filter() {
-
+        openProductWindowWith(Operations.FILTER);
     }
 
     public void provideApp(ProductGUI app) {
@@ -80,26 +80,34 @@ public class MainWindowController {
         return productTable;
     }
 
-    public void executeOperationOn(Product product, Operations operation) {
-        switch (operation) {
-            case ADD:
-                dao.add(product);
-                productTable.getItems().add(product);
-                refreshTable();
-                break;
-            case DELETE:
-                dao.deleteByName(product.getTitle());
-                refreshTable();
-                break;
-            case EDIT:
-                dao.changePrice(product.getTitle(), product.getCost());
-                refreshTable();
-                break;
-            case FIND:
-                Product productToFind = dao.getByTitle(product.getTitle());
-                productTable.getItems().clear();
-                productTable.getItems().add(productToFind);
-                break;
+    public void executeOperationOn(Product product, Operations operation, int costTo) {
+        try {
+            switch (operation) {
+                case ADD:
+                    dao.add(product);
+                    productTable.getItems().add(product);
+                    refreshTable();
+                    break;
+                case DELETE:
+                    dao.deleteByName(product.getTitle());
+                    refreshTable();
+                    break;
+                case EDIT:
+                    dao.changePrice(product.getTitle(), product.getCost());
+                    refreshTable();
+                    break;
+                case FIND:
+                    Product productToFind = dao.getByTitle(product.getTitle());
+                    productTable.getItems().clear();
+                    productTable.getItems().add(productToFind);
+                    break;
+                case FILTER:
+                    productTable.getItems().clear();
+                    productTable.getItems().addAll(dao.filterByPrice(product.getCost(), costTo));
+                    break;
+            }
+        } catch (RuntimeException e) {
+            app.showErrorWindow(e.getMessage());
         }
     }
 
