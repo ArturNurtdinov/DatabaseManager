@@ -15,21 +15,37 @@ public class ProductWindowController {
     TextField title;
 
     @FXML
+    Label titleLabel;
+
+    @FXML
     TextField price;
 
     @FXML
     Label priceLabel;
 
     @FXML
+    Label toLabel;
+
+    @FXML
+    TextField costTo;
+
+    @FXML
     private void handleClick() {
         try {
-            String stitle = title.getText();
+            String stitle = "";
+            if (title.isVisible()) {
+                stitle = title.getText();
+            }
             int cost = 0;
-            if (price.isEditable()) {
+            if (price.isVisible()) {
                 cost = Integer.parseInt(price.getText());
             }
+            int cost2 = 0;
+            if (costTo.isVisible()) {
+                cost2 = Integer.parseInt(this.costTo.getText());
+            }
 
-            parent.executeOperationOn(new Product(0, stitle, cost), operation);
+            parent.executeOperationOn(new Product(0, stitle, cost), operation, cost2);
 
             Stage stage = (Stage) title.getScene().getWindow();
             stage.close();
@@ -60,7 +76,15 @@ public class ProductWindowController {
             case DELETE:
             case FIND:
                 title.setEditable(true);
-                price.setEditable(false);
+                price.setVisible(false);
+                priceLabel.setVisible(false);
+                break;
+            case FILTER:
+                priceLabel.setText("Price from:");
+                titleLabel.setVisible(false);
+                title.setVisible(false);
+                toLabel.setVisible(true);
+                costTo.setVisible(true);
                 break;
         }
     }
