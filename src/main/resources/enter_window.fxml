@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EnterWindowController">
+    <children>
+        <Label layoutX="110.0" layoutY="77.0" text="Type amount of rows to generate:" />
+        <TextField fx:id="input" layoutX="119.0" layoutY="100.0" />
+        <Button layoutX="178.0" layoutY="131.0" mnemonicParsing="false" onAction="#handleClick" text="Ok" />
+    </children>
+</AnchorPane>
