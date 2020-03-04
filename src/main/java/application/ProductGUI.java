@@ -32,11 +32,11 @@ public class ProductGUI extends Application {
 
     public void showLoginWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login_window.fxml"));
+            final FXMLLoader loader = new FXMLLoader(getClass().getResource("/login_window.fxml"));
             primaryStage.setScene(new Scene(loader.load()));
             primaryStage.setTitle("Login");
 
-            LoginWindowController controller = loader.getController();
+            final LoginWindowController controller = loader.getController();
             controller.provideApp(this);
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,11 +45,11 @@ public class ProductGUI extends Application {
 
     public void showMainWindow(int numberToGenerate) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main_window.fxml"));
+            final FXMLLoader loader = new FXMLLoader(getClass().getResource("/main_window.fxml"));
             primaryStage.setScene(new Scene(loader.load()));
             primaryStage.setTitle("Products");
 
-            MainWindowController controller = loader.getController();
+            final MainWindowController controller = loader.getController();
             controller.provideApp(this);
             controller.provideDao(dao);
             controller.provideNumberToGenerate(numberToGenerate);
@@ -65,11 +65,11 @@ public class ProductGUI extends Application {
 
     public void showEnterWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/enter_window.fxml"));
+            final FXMLLoader loader = new FXMLLoader(getClass().getResource("/enter_window.fxml"));
             primaryStage.setScene(new Scene(loader.load()));
             primaryStage.setTitle("Please enter amount of rows to generate");
 
-            EnterWindowController controller = loader.getController();
+            final EnterWindowController controller = loader.getController();
             controller.provideApp(this);
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class ProductGUI extends Application {
     }
 
     public void showErrorWindow(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        final Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(primaryStage);
         alert.setTitle("Error");
         alert.setHeaderText("Something went wrong. Please read information below.");
